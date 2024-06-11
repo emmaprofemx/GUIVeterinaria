@@ -61,6 +61,12 @@ public class Veterinaria extends javax.swing.JFrame {
             }
         });
 
+        txtPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPassActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,7 +106,8 @@ public class Veterinaria extends javax.swing.JFrame {
                 .addGap(30, 30, 30))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(458, 226));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -134,7 +141,9 @@ public class Veterinaria extends javax.swing.JFrame {
                 // Acción al encontrar el usuario
                 dispose();
                 HomePage hpage = new HomePage();
-                hpage.show();
+                RegistroCliente rcliente = new RegistroCliente();
+              //  hpage.show();
+                rcliente.show();
             } else {
                 // Mostrar mensaje de datos incorrectos
                 JOptionPane.showMessageDialog(null, "Datos incorrectos");
@@ -150,6 +159,11 @@ public class Veterinaria extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
+       // jPasswordField.setEchoChar('@ aqui el carácter que deseas utilizar');
+       //txtPass.setEchoChar('*');
+    }//GEN-LAST:event_txtPassActionPerformed
 
     /**
      * @param args the command line arguments

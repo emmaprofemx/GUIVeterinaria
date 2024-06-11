@@ -5,6 +5,7 @@
  */
 package crudprincesa;
 
+import gui.RegistroCliente;
 import gui.Veterinaria;
 
 /**
@@ -18,6 +19,7 @@ public class CRUDPRINCESA {
      */
     public static void main(String[] args) {
         Veterinaria log = new Veterinaria();
+       // RegistroCliente tst = new RegistroCliente();
         log.show();
     }
     
