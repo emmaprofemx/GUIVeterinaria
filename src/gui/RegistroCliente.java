@@ -5,6 +5,7 @@
  */
 package gui;
 
+import db.InformacionBD;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -217,6 +218,7 @@ public class RegistroCliente extends javax.swing.JFrame {
 
         // Verificar si la inserción fue exitosa
         if (rowsAffected > 0) {
+            InformacionBD inf = new InformacionBD();
             // Acción al insertar correctamente el usuario
             JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente");
 
@@ -227,7 +229,9 @@ public class RegistroCliente extends javax.swing.JFrame {
 
             // Obtener el modelo de la tabla
             DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
-
+            inf.loadInformacion(sql, st, rs, tblModel);
+            
+            /*
             // Limpiar la tabla antes de agregar nuevos datos
             tblModel.setRowCount(0);
 
@@ -242,7 +246,7 @@ public class RegistroCliente extends javax.swing.JFrame {
 
                 String tbData[] = {id, tnombre, tapellido, ttelefono, tcorreo, tdireccion};
                 tblModel.addRow(tbData);
-            }
+            }*/
         } else {
             // Mostrar mensaje de error en la inserción
             JOptionPane.showMessageDialog(null, "Error al registrar el usuario");
