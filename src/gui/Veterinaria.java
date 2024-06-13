@@ -39,7 +39,7 @@ public class Veterinaria extends javax.swing.JFrame {
         txtUser = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
-        txtPass = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,9 +61,10 @@ public class Veterinaria extends javax.swing.JFrame {
             }
         });
 
-        txtPass.addActionListener(new java.awt.event.ActionListener() {
+        txtPassword.setToolTipText("");
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPassActionPerformed(evt);
+                txtPasswordActionPerformed(evt);
             }
         });
 
@@ -72,21 +73,22 @@ public class Veterinaria extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(btnLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
-                .addComponent(btnLimpiar)
-                .addGap(102, 102, 102))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                            .addComponent(txtPassword)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(btnLogin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addComponent(btnLimpiar)))
+                .addContainerGap(287, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,7 +100,7 @@ public class Veterinaria extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -106,17 +108,18 @@ public class Veterinaria extends javax.swing.JFrame {
                 .addGap(30, 30, 30))
         );
 
-        setSize(new java.awt.Dimension(458, 226));
+        setSize(new java.awt.Dimension(581, 324));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
        txtUser.setText("");
-       txtPass.setText("");
+       txtPassword.setText("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
          try {
+            
             // Cargar el driver JDBC de MySQL
             Class.forName("com.mysql.cj.jdbc.Driver");
             
@@ -125,7 +128,8 @@ public class Veterinaria extends javax.swing.JFrame {
             
             // Obtener el texto del usuario y la contraseña
             String username = txtUser.getText();
-            String password = txtPass.getText();
+           // String password = txtPassword.getPassword()
+           String password = new String (txtPassword.getPassword());
             
             // Crear la consulta SQL usando PreparedStatement para evitar inyección SQL
             String sql = "SELECT * FROM users_details WHERE username = ? AND passuser = ?";
@@ -144,11 +148,11 @@ public class Veterinaria extends javax.swing.JFrame {
                 RegistroCliente rcliente = new RegistroCliente();
               //  hpage.show();
                 rcliente.show();
-            } else {
+            } else { 
                 // Mostrar mensaje de datos incorrectos
                 JOptionPane.showMessageDialog(null, "Datos incorrectos");
                 txtUser.setText("");
-                txtPass.setText("");
+                txtPassword.setText("");
             }
             
             // Cerrar la conexión y el PreparedStatement
@@ -160,10 +164,9 @@ public class Veterinaria extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void txtPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPassActionPerformed
-       // jPasswordField.setEchoChar('@ aqui el carácter que deseas utilizar');
-       //txtPass.setEchoChar('*');
-    }//GEN-LAST:event_txtPassActionPerformed
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,7 +208,7 @@ public class Veterinaria extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txtPass;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }
