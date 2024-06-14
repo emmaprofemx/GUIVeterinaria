@@ -20,12 +20,17 @@ import javax.swing.table.DefaultTableModel;
  * @author EMMANUEL
  */
 public class RegistroCliente extends javax.swing.JFrame {
-
+    
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+    Statement st = null;
     /**
      * Creates new form RegistroCliente
      */
     public RegistroCliente() {
         initComponents();
+        loadClientData();
     }
 
     /**
@@ -185,7 +190,7 @@ public class RegistroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        Connection con = null;
+    Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     Statement st = null;
@@ -203,8 +208,11 @@ public class RegistroCliente extends javax.swing.JFrame {
         String telefono = txtTelefono.getText();
         String correo = txtCorreo.getText();
         String direccion = txtDireccion.getText();
-
-        // Crear la consulta SQL usando PreparedStatement para evitar inyección SQL
+        
+        if(isValidForm(nombre, apellido, telefono, correo, direccion) == false){
+            // JOptionPane.showMessageDialog(null, "Faltan datos por llenar");
+        }else{
+             // Crear la consulta SQL usando PreparedStatement para evitar inyección SQL
         String sql = "INSERT INTO cliente (nombre, apellido, telefono, correo, direccion) VALUES (?, ?, ?, ?, ?)";
         pst = con.prepareStatement(sql);
         pst.setString(1, nombre);
@@ -213,6 +221,7 @@ public class RegistroCliente extends javax.swing.JFrame {
         pst.setString(4, correo);
         pst.setString(5, direccion);
 
+        
         // Ejecutar la consulta de inserción
         int rowsAffected = pst.executeUpdate();
 
@@ -251,6 +260,8 @@ public class RegistroCliente extends javax.swing.JFrame {
             // Mostrar mensaje de error en la inserción
             JOptionPane.showMessageDialog(null, "Error al registrar el usuario");
         }
+        }
+       
     } catch (Exception e) {
         e.printStackTrace();
         JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
@@ -267,6 +278,87 @@ public class RegistroCliente extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+ 
+    
+    public boolean isValidForm(String nombre , String apellido , 
+            String telefono , String correo , String direccion){
+        if(nombre.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingresa el nombre");
+            return false;
+        }
+         if(apellido.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingresa los apellidos");
+            return false;
+        }
+         if(telefono.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingresa el telefono");
+            return false;
+        }
+         if(correo.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingresa el correo");
+            return false;
+        }
+         if(direccion.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ingresa el direccion");
+            return false;
+        }
+        return true;
+    }
+    
+    
+    private void loadClientData() {
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            // Cargar el driver JDBC de MySQL
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establecer la conexión con la base de datos
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSL=false", "root", "password");
+
+            // Crear la consulta SQL para obtener los datos
+            String sql = "SELECT * FROM cliente";
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+
+            // Obtener el modelo de la tabla
+            DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+            loadInformacion(sql, st, rs, tblModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        } finally {
+            // Cerrar el ResultSet, el Statement y la conexión
+            try {
+                if (rs != null) rs.close();
+                if (st != null) st.close();
+                if (con != null) con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void loadInformacion(String sql, Statement st, ResultSet rs, DefaultTableModel tblModel) throws SQLException {
+        // Limpiar la tabla antes de agregar nuevos datos
+        tblModel.setRowCount(0);
+
+        // Añadir filas de datos al modelo de tabla
+        while (rs.next()) {
+            String id = String.valueOf(rs.getInt("id"));
+            String tnombre = rs.getString("nombre");
+            String tapellido = rs.getString("apellido");
+            String ttelefono = rs.getString("telefono");
+            String tcorreo = rs.getString("correo");
+            String tdireccion = rs.getString("direccion");
+
+            String tbData[] = {id, tnombre, tapellido, ttelefono, tcorreo, tdireccion};
+            tblModel.addRow(tbData);
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

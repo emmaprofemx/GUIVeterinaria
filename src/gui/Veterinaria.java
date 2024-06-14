@@ -6,6 +6,7 @@
 package gui;
 
 import com.mysql.cj.xdevapi.Statement;
+import db.InformacionBD;
 import java.awt.Color;
 import java.awt.Image;
 import java.sql.Connection;
@@ -21,6 +22,7 @@ import javax.swing.JOptionPane;
  */
 public class Veterinaria extends javax.swing.JFrame {
 
+   
     /**
      * Creates new form Veterinaria
      */
@@ -44,7 +46,6 @@ public class Veterinaria extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnLogin = new javax.swing.JButton();
-        btnLimpiar = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
         txtUser = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -62,21 +63,14 @@ public class Veterinaria extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnLogin.setBackground(new java.awt.Color(102, 255, 0));
-        btnLogin.setText("LOGIN");
+        btnLogin.setText("INGRESAR");
+        btnLogin.setBorderPainted(false);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, -1, -1));
-
-        btnLimpiar.setText("LIMPIAR");
-        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 410, -1, -1));
+        jPanel1.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 360, -1));
 
         txtPassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtPassword.setToolTipText("");
@@ -161,17 +155,11 @@ public class Veterinaria extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
-    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        txtUser.setText("");
-        txtPassword.setText("");
-    }//GEN-LAST:event_btnLimpiarActionPerformed
-
     
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
       
         try {
-
             // Cargar el driver JDBC de MySQL
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -282,7 +270,6 @@ public class Veterinaria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
