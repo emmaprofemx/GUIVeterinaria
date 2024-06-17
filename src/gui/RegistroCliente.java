@@ -196,11 +196,13 @@ public class RegistroCliente extends javax.swing.JFrame {
     Statement st = null;
 
     try {
+        String name_db = "test";
         // Cargar el driver JDBC de MySQL
         Class.forName("com.mysql.cj.jdbc.Driver");
 
         // Establecer la conexión con la base de datos
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSL=false", "root", "password");
+        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + name_db+
+                "?useSSL=false", "root", "password");
 
         // Obtener el texto del usuario y la contraseña
         String nombre = txtNombre.getText();
