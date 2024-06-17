@@ -5,7 +5,9 @@
  */
 package gui;
 
+import db.BDConnection;
 import db.InformacionBD;
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -104,6 +106,11 @@ public class RegistroCliente extends javax.swing.JFrame {
         btnEditar.setText("EDITAR");
 
         btnEliminar.setText("ELIMINAR");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("NUEVO");
 
@@ -279,6 +286,51 @@ public class RegistroCliente extends javax.swing.JFrame {
         }
     }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+      int a = JOptionPane.showConfirmDialog((Component) null, "¿Quieres eliminar?", "DELETE", JOptionPane.YES_NO_OPTION);
+    System.out.println("Valor de a:" + a);
+    if (a == 0) {
+        int row = jTable1.getSelectedRow();
+        if (row != -1) { // Asegúrate de que hay una fila seleccionada
+            String call = jTable1.getModel().getValueAt(row, 0).toString();
+            String sql = "DELETE FROM cliente WHERE id = " + call;
+            System.out.println("SQL: " + sql); // Imprimir la consulta SQL para verificarla
+            
+            BDConnection dbConnection = new BDConnection();
+            Connection con = null;
+            PreparedStatement pst = null;
+
+            try {
+                con = dbConnection.getConnection();
+                pst = con.prepareStatement(sql);
+                int affectedRows = pst.executeUpdate(); // Usar executeUpdate() para operaciones de modificación
+                if (affectedRows > 0) {
+                    JOptionPane.showMessageDialog(null, "Eliminado correctamente");
+
+                    // Eliminar la fila del modelo de la tabla
+                    ((DefaultTableModel) jTable1.getModel()).removeRow(row);
+
+                    // updateTable(); // Si tienes un método para actualizar la tabla, puedes llamarlo aquí
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontró el registro para eliminar.");
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error al eliminar el dato: " + e.getMessage());
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (pst != null) pst.close();
+                    if (con != null) con.close(); // Cerrar la conexión aquí
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, selecciona una fila para eliminar.");
+        }
+    }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
  
     
