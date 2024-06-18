@@ -4,7 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/gui/Veterinaria.java</file>
+            <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/gui/HomePage.java</file>
             <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/gui/RegistroCliente.java</file>
+            <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/db/BDConnection.java</file>
             <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/db/InformacionBD.java</file>
         </group>
     </open-files>
