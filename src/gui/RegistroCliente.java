@@ -22,11 +22,12 @@ import javax.swing.table.DefaultTableModel;
  * @author EMMANUEL
  */
 public class RegistroCliente extends javax.swing.JFrame {
-    
+
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     Statement st = null;
+
     /**
      * Creates new form RegistroCliente
      */
@@ -110,6 +111,11 @@ public class RegistroCliente extends javax.swing.JFrame {
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-editar.png"))); // NOI18N
         btnEditar.setText("EDITAR");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-eliminar.png"))); // NOI18N
         btnEliminar.setText("ELIMINAR");
@@ -199,59 +205,58 @@ public class RegistroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-    Connection con = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
-    Statement st = null;
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Statement st = null;
 
-    try {
-        String name_db = "test";
-        // Cargar el driver JDBC de MySQL
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        try {
+            String name_db = "test";
+            // Cargar el driver JDBC de MySQL
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-        // Establecer la conexión con la base de datos
-        con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + name_db+
-                "?useSSL=false", "root", "password");
+            // Establecer la conexión con la base de datos
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + name_db
+                    + "?useSSL=false", "root", "password");
 
-        // Obtener el texto del usuario y la contraseña
-        String nombre = txtNombre.getText();
-        String apellido = txtApellidos.getText();
-        String telefono = txtTelefono.getText();
-        String correo = txtCorreo.getText();
-        String direccion = txtDomicilio.getText();
-        
-        if(isValidForm(nombre, apellido, telefono, correo, direccion) == false){
-            // JOptionPane.showMessageDialog(null, "Faltan datos por llenar");
-        }else{
-             // Crear la consulta SQL usando PreparedStatement para evitar inyección SQL
-        String sql = "INSERT INTO cliente (nombre, apellido, telefono, correo, direccion) VALUES (?, ?, ?, ?, ?)";
-        pst = con.prepareStatement(sql);
-        pst.setString(1, nombre);
-        pst.setString(2, apellido);
-        pst.setString(3, telefono);
-        pst.setString(4, correo);
-        pst.setString(5, direccion);
+            // Obtener el texto del usuario y la contraseña
+            String nombre = txtNombre.getText();
+            String apellido = txtApellidos.getText();
+            String telefono = txtTelefono.getText();
+            String correo = txtCorreo.getText();
+            String direccion = txtDomicilio.getText();
 
-        
-        // Ejecutar la consulta de inserción
-        int rowsAffected = pst.executeUpdate();
+            if (isValidForm(nombre, apellido, telefono, correo, direccion) == false) {
+                // JOptionPane.showMessageDialog(null, "Faltan datos por llenar");
+            } else {
+                // Crear la consulta SQL usando PreparedStatement para evitar inyección SQL
+                String sql = "INSERT INTO cliente (nombre, apellido, telefono, correo, direccion) VALUES (?, ?, ?, ?, ?)";
+                pst = con.prepareStatement(sql);
+                pst.setString(1, nombre);
+                pst.setString(2, apellido);
+                pst.setString(3, telefono);
+                pst.setString(4, correo);
+                pst.setString(5, direccion);
 
-        // Verificar si la inserción fue exitosa
-        if (rowsAffected > 0) {
-            InformacionBD inf = new InformacionBD();
-            // Acción al insertar correctamente el usuario
-            JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente");
+                // Ejecutar la consulta de inserción
+                int rowsAffected = pst.executeUpdate();
 
-            // Crear la consulta SQL para obtener los datos
-            String sql_2 = "SELECT * FROM cliente";
-            st = con.createStatement();
-            rs = st.executeQuery(sql_2);
+                // Verificar si la inserción fue exitosa
+                if (rowsAffected > 0) {
+                    InformacionBD inf = new InformacionBD();
+                    // Acción al insertar correctamente el usuario
+                    JOptionPane.showMessageDialog(null, "Usuario registrado exitosamente");
 
-            // Obtener el modelo de la tabla
-            DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
-            inf.loadInformacion(sql, st, rs, tblModel);
-            
-            /*
+                    // Crear la consulta SQL para obtener los datos
+                    String sql_2 = "SELECT * FROM cliente";
+                    st = con.createStatement();
+                    rs = st.executeQuery(sql_2);
+
+                    // Obtener el modelo de la tabla
+                    DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+                    inf.loadInformacion(sql, st, rs, tblModel);
+
+                    /*
             // Limpiar la tabla antes de agregar nuevos datos
             tblModel.setRowCount(0);
 
@@ -267,116 +272,151 @@ public class RegistroCliente extends javax.swing.JFrame {
                 String tbData[] = {id, tnombre, tapellido, ttelefono, tcorreo, tdireccion};
                 tblModel.addRow(tbData);
             }*/
-        } else {
-            // Mostrar mensaje de error en la inserción
-            JOptionPane.showMessageDialog(null, "Error al registrar el usuario");
-        }
-        }
-       
-    } catch (Exception e) {
-        e.printStackTrace();
-        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-    } finally {
-        // Cerrar el ResultSet, el Statement, el PreparedStatement y la conexión
-        try {
-            if (rs != null) rs.close();
-            if (st != null) st.close();
-            if (pst != null) pst.close();
-            if (con != null) con.close();
-        } catch (SQLException e) {
+                } else {
+                    // Mostrar mensaje de error en la inserción
+                    JOptionPane.showMessageDialog(null, "Error al registrar el usuario");
+                }
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        } finally {
+            // Cerrar el ResultSet, el Statement, el PreparedStatement y la conexión
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-    }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-      int a = JOptionPane.showConfirmDialog((Component) null, "¿Quieres eliminar?", "DELETE", JOptionPane.YES_NO_OPTION);
-    System.out.println("Valor de a:" + a);
-    if (a == 0) {
-        int row = jTable1.getSelectedRow();
-        if (row != -1) { // Asegúrate de que hay una fila seleccionada
-            String call = jTable1.getModel().getValueAt(row, 0).toString();
-            String sql = "DELETE FROM cliente WHERE id = " + call;
-            System.out.println("SQL: " + sql); // Imprimir la consulta SQL para verificarla
-            
-            BDConnection dbConnection = new BDConnection();
-            Connection con = null;
-            PreparedStatement pst = null;
+        int a = JOptionPane.showConfirmDialog((Component) null, "¿Quieres eliminar?", "DELETE", JOptionPane.YES_NO_OPTION);
+        System.out.println("Valor de a:" + a);
+        if (a == 0) {
+            int row = jTable1.getSelectedRow();
+            if (row != -1) { // Asegúrate de que hay una fila seleccionada
+                String call = jTable1.getModel().getValueAt(row, 0).toString();
+                String sql = "DELETE FROM cliente WHERE id = " + call;
+                System.out.println("SQL: " + sql); // Imprimir la consulta SQL para verificarla
 
-            try {
-                con = dbConnection.getConnection();
-                pst = con.prepareStatement(sql);
-                int affectedRows = pst.executeUpdate(); // Usar executeUpdate() para operaciones de modificación
-                if (affectedRows > 0) {
-                    JOptionPane.showMessageDialog(null, "Eliminado correctamente");
+                BDConnection dbConnection = new BDConnection();
+                Connection con = null;
+                PreparedStatement pst = null;
 
-                    // Eliminar la fila del modelo de la tabla
-                    ((DefaultTableModel) jTable1.getModel()).removeRow(row);
-
-                    // updateTable(); // Si tienes un método para actualizar la tabla, puedes llamarlo aquí
-                } else {
-                    JOptionPane.showMessageDialog(null, "No se encontró el registro para eliminar.");
-                }
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Error al eliminar el dato: " + e.getMessage());
-                e.printStackTrace();
-            } finally {
                 try {
-                    if (pst != null) pst.close();
-                    if (con != null) con.close(); // Cerrar la conexión aquí
+                    con = dbConnection.getConnection();
+                    pst = con.prepareStatement(sql);
+                    int affectedRows = pst.executeUpdate(); // Usar executeUpdate() para operaciones de modificación
+                    if (affectedRows > 0) {
+                        JOptionPane.showMessageDialog(null, "Eliminado correctamente");
+
+                        // Eliminar la fila del modelo de la tabla
+                        ((DefaultTableModel) jTable1.getModel()).removeRow(row);
+
+                        // updateTable(); // Si tienes un método para actualizar la tabla, puedes llamarlo aquí
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se encontró el registro para eliminar.");
+                    }
                 } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, "Error al eliminar el dato: " + e.getMessage());
                     e.printStackTrace();
+                } finally {
+                    try {
+                        if (pst != null) {
+                            pst.close();
+                        }
+                        if (con != null) {
+                            con.close(); // Cerrar la conexión aquí
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor, selecciona una fila para eliminar.");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor, selecciona una fila para eliminar.");
         }
-    }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
-        
+
         String tblNombre = tblModel.getValueAt(jTable1.getSelectedRow(), 0).toString();
         String tblApellidos = tblModel.getValueAt(jTable1.getSelectedRow(), 1).toString();
         String tblTelefono = tblModel.getValueAt(jTable1.getSelectedRow(), 2).toString();
         String tblCorreo = tblModel.getValueAt(jTable1.getSelectedRow(), 3).toString();
         String tblDomicilio = tblModel.getValueAt(jTable1.getSelectedRow(), 4).toString();
-        
+
         txtNombre.setText(tblNombre);
         txtApellidos.setText(tblApellidos);
         txtTelefono.setText(tblTelefono);
         txtCorreo.setText(tblCorreo);
         txtDomicilio.setText(tblDomicilio);
-        
+
 
     }//GEN-LAST:event_jTable1MouseClicked
 
-    public boolean isValidForm(String nombre , String apellido , 
-            String telefono , String correo , String direccion){
-        if(nombre.isEmpty()){
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+        int selectedRow = jTable1.getSelectedRow();
+
+        if (selectedRow != -1) {  // Verifica que se haya seleccionado una fila
+            String edtNombre = txtNombre.getText();
+            String edtApellidos = txtApellidos.getText();
+            String edtTelefono = txtTelefono.getText();
+            String edtCorreo = txtCorreo.getText();
+            String edtDomicilio = txtDomicilio.getText();
+
+            // Actualiza los valores en la fila seleccionada
+            tblModel.setValueAt(edtNombre, selectedRow, 0);
+            tblModel.setValueAt(edtApellidos, selectedRow, 1);
+            tblModel.setValueAt(edtTelefono, selectedRow, 2);
+            tblModel.setValueAt(edtCorreo, selectedRow, 3);
+            tblModel.setValueAt(edtDomicilio, selectedRow, 4);
+        } else {
+            // Maneja el caso donde no se ha seleccionado ninguna fila (opcional)
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una fila para editar.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    public boolean isValidForm(String nombre, String apellido,
+            String telefono, String correo, String direccion) {
+        if (nombre.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingresa el nombre");
             return false;
         }
-         if(apellido.isEmpty()){
+        if (apellido.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingresa los apellidos");
             return false;
         }
-         if(telefono.isEmpty()){
+        if (telefono.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingresa el telefono");
             return false;
         }
-         if(correo.isEmpty()){
+        if (correo.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingresa el correo");
             return false;
         }
-         if(direccion.isEmpty()){
+        if (direccion.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingresa el direccion");
             return false;
         }
         return true;
     }
-    
+
     private void loadClientData() {
         Connection con = null;
         Statement st = null;
@@ -397,9 +437,15 @@ public class RegistroCliente extends javax.swing.JFrame {
         } finally {
             // Cerrar el ResultSet, el Statement y la conexión
             try {
-                if (rs != null) rs.close();
-                if (st != null) st.close();
-                if (con != null) con.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -419,8 +465,7 @@ public class RegistroCliente extends javax.swing.JFrame {
             tblModel.addRow(tbData);
         }
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
