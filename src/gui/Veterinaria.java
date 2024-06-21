@@ -59,6 +59,7 @@ public class Veterinaria extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setMinimumSize(new java.awt.Dimension(1208, 1200));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -185,9 +186,11 @@ public class Veterinaria extends javax.swing.JFrame {
                 // Acción al encontrar el usuario
                 dispose();
                 HomePage hpage = new HomePage();
+                // hpage.show();
+                InventarioVW invpage = new InventarioVW();
+                invpage.show();
                 RegistroCliente rcliente = new RegistroCliente();
-                //  hpage.show();
-                rcliente.show();
+                 //rcliente.show();
             } else {
                 // Mostrar mensaje de datos incorrectos
                 JOptionPane.showMessageDialog(null, "Datos incorrectos");
