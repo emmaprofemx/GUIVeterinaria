@@ -23,7 +23,9 @@ import javax.swing.table.DefaultTableModel;
  * @author EMMANUEL
  */
 public class CategoriaVW extends javax.swing.JFrame {
-      InformacionBD inf = null;
+
+    InformacionBD inf = null;
+
     /**
      * Creates new form CategoriaVW
      */
@@ -195,7 +197,7 @@ public class CategoriaVW extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       Connection con = null;
+        Connection con = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
         Statement st = null;
@@ -222,7 +224,7 @@ public class CategoriaVW extends javax.swing.JFrame {
 
                 // Verificar si la inserción fue exitosa
                 if (rowsAffected > 0) {
-                   
+
                     // Acción al insertar correctamente el usuario
                     JOptionPane.showMessageDialog(null, "Categoria registrada "
                             + "exitosamente");
@@ -234,7 +236,7 @@ public class CategoriaVW extends javax.swing.JFrame {
 
                     // Obtener el modelo de la tabla
                     DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
-                   // inf.loadInformacion(sql, st, rs, tblModel);
+                    // inf.loadInformacion(sql, st, rs, tblModel);
                     loadInformacionCAT(sql, st, rs, tblModel);
                     txtNombreCAT.setText("");
                 } else {
@@ -268,13 +270,13 @@ public class CategoriaVW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-       
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-      int a = JOptionPane.showConfirmDialog((Component) null, 
-              "¿DESEAS ELIMINAR ESTA CATEGORIA?",
-              "DELETE", JOptionPane.YES_NO_OPTION);
+        int a = JOptionPane.showConfirmDialog((Component) null,
+                "¿DESEAS ELIMINAR ESTA CATEGORIA?",
+                "DELETE", JOptionPane.YES_NO_OPTION);
         System.out.println("Valor de a:" + a);
         if (a == 0) {
             int row = jTable1.getSelectedRow();
@@ -322,20 +324,22 @@ public class CategoriaVW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnVolverCatVWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverCatVWActionPerformed
-    HomePage hmvw = new HomePage();
-    hmvw.setVisible(true);
-    WindowUtils.close(this); 
+        HomePage hmvw = new HomePage();
+        hmvw.setVisible(true);
+        InventarioVW invw = new InventarioVW();
+        invw.setVisible(true);
+        WindowUtils.close(this);
     }//GEN-LAST:event_btnVolverCatVWActionPerformed
 
-      private boolean isValidForm(String nombreCAT) {
+    private boolean isValidForm(String nombreCAT) {
         if (nombreCAT.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingresa el nombre de la categoria");
             return false;
-        }  
+        }
         return true;
     }
-      
-       private void loadCategoriaData() {
+
+    private void loadCategoriaData() {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
@@ -369,8 +373,8 @@ public class CategoriaVW extends javax.swing.JFrame {
             }
         }
     }
-       
-       public void loadInformacionCAT(String sql, Statement st, ResultSet rs, DefaultTableModel tblModel) throws SQLException {
+
+    public void loadInformacionCAT(String sql, Statement st, ResultSet rs, DefaultTableModel tblModel) throws SQLException {
         // Limpiar la tabla antes de agregar nuevos datos
         tblModel.setRowCount(0);
         // Añadir filas de datos al modelo de tabla
@@ -381,7 +385,7 @@ public class CategoriaVW extends javax.swing.JFrame {
             tblModel.addRow(tbData);
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */

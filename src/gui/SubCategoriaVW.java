@@ -5,6 +5,19 @@
  */
 package gui;
 
+import crudprincesa.WindowUtils;
+import db.BDConnection;
+import db.InformacionBD;
+import java.awt.Component;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author EMMANUEL
@@ -16,6 +29,9 @@ public class SubCategoriaVW extends javax.swing.JFrame {
      */
     public SubCategoriaVW() {
         initComponents();
+        this.setResizable(false);
+        setLocationRelativeTo(null);
+        loadSubCategoriaData();
     }
 
     /**
@@ -35,8 +51,10 @@ public class SubCategoriaVW extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNombreSubCat = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        txtIdCategoriaPadre = new javax.swing.JTextField();
+        btnVolverSub = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -94,76 +112,248 @@ public class SubCategoriaVW extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setText("NOMBRE DE SUBCATEGORIA");
 
-        jTextField1.setText("jTextField1");
+        jLabel3.setText("ID CATEGORIA PERTENECIENTE");
 
-        jLabel3.setText("jLabel3");
+        txtIdCategoriaPadre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdCategoriaPadreActionPerformed(evt);
+            }
+        });
+        txtIdCategoriaPadre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdCategoriaPadreKeyTyped(evt);
+            }
+        });
+
+        btnVolverSub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-volver.png"))); // NOI18N
+        btnVolverSub.setText("VOLVER");
+        btnVolverSub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverSubActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnAgregar)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnEditar)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnEliminar)
-                        .addGap(93, 93, 93))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(207, 207, 207))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(32, 32, 32)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                    .addComponent(btnAgregar)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3)
+                        .addComponent(txtIdCategoriaPadre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombreSubCat, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(btnVolverSub)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(145, 145, 145))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnEditar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnEliminar))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(76, 76, 76))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVolverSub)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNombreSubCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtIdCategoriaPadre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
                     .addComponent(btnAgregar)
+                    .addComponent(btnEditar)
                     .addComponent(btnEliminar))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 470));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 280));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       
+        Connection con = null;
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        Statement st = null;
+
+        try {
+            String name_db = "test";
+            // Cargar el driver JDBC de MySQL
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Establecer la conexión con la base de datos
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + name_db
+                    + "?useSSL=false", "root", "password");
+
+            // Obtener el texto del usuario y la contraseña
+            String nombre = txtNombreSubCat.getText();
+            String idsub = txtIdCategoriaPadre.getText();
+           
+
+            if (isValidForm(nombre, idsub) == false) {
+                // JOptionPane.showMessageDialog(null, "Faltan datos por llenar");
+            } else {
+                // Crear la consulta SQL usando PreparedStatement para evitar inyección SQL
+                String sql = "INSERT INTO subcategoria (nombre, id_categoria) VALUES (?, ?)";
+                pst = con.prepareStatement(sql);
+                pst.setString(1, nombre);
+                pst.setInt(2, Integer.parseInt(idsub));
+                // pst.setString(2, idsub);
+
+                // Ejecutar la consulta de inserción
+                int rowsAffected = pst.executeUpdate();
+
+                // Verificar si la inserción fue exitosa
+                if (rowsAffected > 0) {
+                    InformacionBD inf = new InformacionBD();
+                    // Acción al insertar correctamente el usuario
+                    JOptionPane.showMessageDialog(null, "Sub categoria registrada exitosamente");
+
+                    // Crear la consulta SQL para obtener los datos
+                    String sql_2 = "SELECT * FROM subcategoria";
+                    st = con.createStatement();
+                    rs = st.executeQuery(sql_2);
+
+                    // Obtener el modelo de la tabla
+                    DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+                    //inf.loadInformacion(sql, st, rs, tblModel);
+                     loadSubCategoriaData();
+                     limpiarCampos();
+                    /*
+            // Limpiar la tabla antes de agregar nuevos datos
+            tblModel.setRowCount(0);
+
+            // Añadir filas de datos al modelo de tabla
+            while (rs.next()) {
+                String id = String.valueOf(rs.getInt("id"));
+                String tnombre = rs.getString("nombre");
+                String tapellido = rs.getString("apellido");
+                String ttelefono = rs.getString("telefono");
+                String tcorreo = rs.getString("correo");
+                String tdireccion = rs.getString("direccion");
+
+                String tbData[] = {id, tnombre, tapellido, ttelefono, tcorreo, tdireccion};
+                tblModel.addRow(tbData);
+            }*/
+                } else {
+                    // Mostrar mensaje de error en la inserción
+                    JOptionPane.showMessageDialog(null, "Error al registrar el usuario");
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        } finally {
+            // Cerrar el ResultSet, el Statement, el PreparedStatement y la conexión
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-      
+       int a = JOptionPane.showConfirmDialog((Component) null, "¿Quieres eliminar?", "DELETE", JOptionPane.YES_NO_OPTION);
+        System.out.println("Valor de a:" + a);
+        if (a == 0) {
+            int row = jTable1.getSelectedRow();
+            if (row != -1) { // Asegúrate de que hay una fila seleccionada
+                String call = jTable1.getModel().getValueAt(row, 0).toString();
+                String sql = "DELETE FROM subcategoria WHERE id = " + call;
+                System.out.println("SQL: " + sql); // Imprimir la consulta SQL para verificarla
+
+                BDConnection dbConnection = new BDConnection();
+                Connection con = null;
+                PreparedStatement pst = null;
+
+                try {
+                    con = dbConnection.getConnection();
+                    pst = con.prepareStatement(sql);
+                    int affectedRows = pst.executeUpdate(); // Usar executeUpdate() para operaciones de modificación
+                    if (affectedRows > 0) {
+                        JOptionPane.showMessageDialog(null, "Eliminado correctamente");
+
+                        // Eliminar la fila del modelo de la tabla
+                        ((DefaultTableModel) jTable1.getModel()).removeRow(row);
+
+                        // updateTable(); // Si tienes un método para actualizar la tabla, puedes llamarlo aquí
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se encontró el registro para eliminar.");
+                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, "Error al eliminar el dato: " + e.getMessage());
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (pst != null) {
+                            pst.close();
+                        }
+                        if (con != null) {
+                            con.close(); // Cerrar la conexión aquí
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor, selecciona una fila para eliminar.");
+            }
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+     public boolean isValidForm(String nombre, String idsub) {
+        if (nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingresa el nombre de la subcategoria");
+            return false;
+        }
+        if (idsub.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingresa el id padre");
+            return false;
+        }
+        return true;
+    }
+    
+    
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         /*
         DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
@@ -186,6 +376,78 @@ public class SubCategoriaVW extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void btnVolverSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverSubActionPerformed
+        InventarioVW invVW = new InventarioVW();
+        invVW.setVisible(true);
+        WindowUtils.close(this); 
+    }//GEN-LAST:event_btnVolverSubActionPerformed
+
+    private void txtIdCategoriaPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdCategoriaPadreActionPerformed
+     
+    }//GEN-LAST:event_txtIdCategoriaPadreActionPerformed
+
+    private void txtIdCategoriaPadreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdCategoriaPadreKeyTyped
+       char c = evt.getKeyChar();
+       
+       if(!Character.isDigit(c)){
+           evt.consume();
+       }
+    }//GEN-LAST:event_txtIdCategoriaPadreKeyTyped
+
+    
+     private void loadSubCategoriaData() {
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSL=false", "root", "password");
+            String sql = "SELECT * FROM subcategoria";
+            st = con.createStatement();
+            rs = st.executeQuery(sql);
+
+            // Obtener el modelo de la tabla
+            DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
+            loadInformacionSUBCAT(sql, st, rs, tblModel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        } finally {
+            // Cerrar el ResultSet, el Statement y la conexión
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (st != null) {
+                    st.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+      public void limpiarCampos(){
+       txtNombreSubCat.setText("");
+       txtIdCategoriaPadre.setText("");
+    }
+     
+    public void loadInformacionSUBCAT(String sql, Statement st, ResultSet rs, DefaultTableModel tblModel) throws SQLException {
+        // Limpiar la tabla antes de agregar nuevos datos
+        tblModel.setRowCount(0);
+        // Añadir filas de datos al modelo de tabla
+        while (rs.next()) {
+            String id = String.valueOf(rs.getInt("id"));
+            String tnombre = rs.getString("nombre");
+            String tnombre_categoria = rs.getString("id_categoria");
+            String tbData[] = {id,tnombre,tnombre_categoria};
+            tblModel.addRow(tbData);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -225,12 +487,14 @@ public class SubCategoriaVW extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnVolverSub;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtIdCategoriaPadre;
+    private javax.swing.JTextField txtNombreSubCat;
     // End of variables declaration//GEN-END:variables
 }

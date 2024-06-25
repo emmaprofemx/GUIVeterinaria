@@ -35,7 +35,7 @@ public class HomePage extends javax.swing.JFrame {
         btnAgregarPersona = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnInventarioHP = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,8 +67,13 @@ public class HomePage extends javax.swing.JFrame {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-agendar.png"))); // NOI18N
         jButton3.setText("AGENDAR CITA");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-inventario.png"))); // NOI18N
-        jButton4.setText("INVENTARIO");
+        btnInventarioHP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-inventario.png"))); // NOI18N
+        btnInventarioHP.setText("INVENTARIO");
+        btnInventarioHP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventarioHPActionPerformed(evt);
+            }
+        });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-pos.png"))); // NOI18N
         jButton5.setText("PUNTO DE VENTA");
@@ -82,7 +87,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3)
                     .addComponent(jButton1)
-                    .addComponent(jButton4))
+                    .addComponent(btnInventarioHP))
                 .addGap(68, 68, 68)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
@@ -104,7 +109,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnInventarioHP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -141,6 +146,11 @@ public class HomePage extends javax.swing.JFrame {
         CategoriaVW catvw = new CategoriaVW();
         catvw.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnInventarioHPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioHPActionPerformed
+       InventarioVW invw = new InventarioVW();
+       invw.setVisible(true);
+    }//GEN-LAST:event_btnInventarioHPActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,10 +189,10 @@ public class HomePage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarPersona;
+    private javax.swing.JButton btnInventarioHP;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
