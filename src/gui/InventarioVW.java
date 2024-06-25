@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -54,13 +55,26 @@ public class InventarioVW extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnVolverINV = new javax.swing.JButton();
         btnSubcategorias = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtNombreProducto = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
+        cbCategoria = new javax.swing.JComboBox<>();
+        cbSubCategoria = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Nirmala UI", 1, 24)); // NOI18N
         jLabel5.setText("INVENTARIO");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(245, 18, -1, 30));
 
         btnCategorias.setText("CATEGORIAS");
         btnCategorias.addActionListener(new java.awt.event.ActionListener() {
@@ -68,8 +82,10 @@ public class InventarioVW extends javax.swing.JFrame {
                 btnCategoriasActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 71, 126, -1));
 
         jButton2.setText("PRODUCTOS");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 71, 126, -1));
 
         btnAgregarInv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-add-48.png"))); // NOI18N
         btnAgregarInv.setText("AGREGAR");
@@ -78,6 +94,7 @@ public class InventarioVW extends javax.swing.JFrame {
                 btnAgregarInvActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAgregarInv, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, -1, -1));
 
         btnEliminarInv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-eliminar.png"))); // NOI18N
         btnEliminarInv.setText("ELIMINAR");
@@ -86,6 +103,7 @@ public class InventarioVW extends javax.swing.JFrame {
                 btnEliminarInvActionPerformed(evt);
             }
         });
+        getContentPane().add(btnEliminarInv, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 400, -1, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,10 +124,14 @@ public class InventarioVW extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 105, 645, 193));
+
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-editar.png"))); // NOI18N
         btnEditar.setText("EDITAR");
+        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, -1, -1));
 
         jLabel1.setText("AQUI VAN LOS PRODUCTOS ");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 32, -1, -1));
 
         btnVolverINV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-volver.png"))); // NOI18N
         btnVolverINV.setText("VOLVER");
@@ -118,6 +140,7 @@ public class InventarioVW extends javax.swing.JFrame {
                 btnVolverINVActionPerformed(evt);
             }
         });
+        getContentPane().add(btnVolverINV, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 11, -1, -1));
 
         btnSubcategorias.setText("SUBCATEGORIAS");
         btnSubcategorias.addActionListener(new java.awt.event.ActionListener() {
@@ -125,87 +148,61 @@ public class InventarioVW extends javax.swing.JFrame {
                 btnSubcategoriasActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSubcategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 71, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(btnVolverINV)
-                        .addGap(111, 111, 111)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(btnCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(btnSubcategorias))
-                .addGap(106, 106, 106))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(btnAgregarInv)
-                .addGap(70, 70, 70)
-                .addComponent(btnEditar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEliminarInv)
-                .addGap(76, 76, 76))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnVolverINV)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnCategorias)
-                            .addComponent(jButton2)
-                            .addComponent(btnSubcategorias))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregarInv)
-                    .addComponent(btnEditar)
-                    .addComponent(btnEliminarInv))
-                .addGap(75, 75, 75))
-        );
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("CANTIDAD");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("NOMBRE PRODUCTO");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 316, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("PRECIO");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 320, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setText("SUBCATEGORIA");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("CATEGORIA");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, -1, -1));
+        getContentPane().add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 120, -1));
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 71, 30));
+        getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 79, -1));
+
+        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productos Alimenticios", "Accesorio para mascotas", "Productos de Higiene y cuidado", "Medicamentos y Productos de Salud" }));
+        cbCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCategoriaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, 170, -1));
+
+        cbSubCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alimento para perros y gatos", "Alimento para otras mascotas", "Suplementos Alimenticios" }));
+        cbSubCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSubCategoriaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbSubCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 220, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
-    
+
     private void btnVolverINVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverINVActionPerformed
         HomePage hmvw = new HomePage();
         hmvw.setVisible(true);
-        WindowUtils.close(this); 
+        WindowUtils.close(this);
     }//GEN-LAST:event_btnVolverINVActionPerformed
 
     private void btnEliminarInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarInvActionPerformed
-        int a = JOptionPane.showConfirmDialog((Component) null, 
-              "¿DESEAS ELIMINAR ESTE PRODUCTO?",
-              "DELETE", JOptionPane.YES_NO_OPTION);
+        int a = JOptionPane.showConfirmDialog((Component) null,
+                "¿DESEAS ELIMINAR ESTE PRODUCTO?",
+                "DELETE", JOptionPane.YES_NO_OPTION);
         System.out.println("Valor de a:" + a);
         if (a == 0) {
             int row = jTable1.getSelectedRow();
@@ -253,7 +250,7 @@ public class InventarioVW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarInvActionPerformed
 
     private void btnAgregarInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarInvActionPerformed
-        /*
+
         Connection con = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -268,34 +265,57 @@ public class InventarioVW extends javax.swing.JFrame {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + name_db
                     + "?useSSL=false", "root", "password");
             // Obtener el texto del usuario y la contraseña
-            String nombreCat = txtNombreCAT.getText();
-            if (isValidForm(nombreCat) == false) {
+            String nombreProducto =  txtNombreProducto.getText();
+            String cantidadProducto =  txtNombreProducto.getText();
+            String precioProducto = txtPrecio.getText();
+             int value = subCat(cbSubCategoria.getSelectedItem().toString());
+            /*
+              String idsub = txtIdCategoriaPadre.getText();
+           
+
+            if (isValidForm(nombre, idsub) == false) {
                 // JOptionPane.showMessageDialog(null, "Faltan datos por llenar");
             } else {
                 // Crear la consulta SQL usando PreparedStatement para evitar inyección SQL
-                String sql = "INSERT INTO categoria (nombre) VALUES (?)";
+                String sql = "INSERT INTO subcategoria (nombre, id_categoria) VALUES (?, ?)";
                 pst = con.prepareStatement(sql);
-                pst.setString(1, nombreCat);
+                pst.setString(1, nombre);
+                pst.setInt(2, Integer.parseInt(idsub));
+                // pst.setString(2, idsub);
+                   */
+            if (isValidForm(nombreProducto ,cantidadProducto , precioProducto) == false) {
+                // JOptionPane.showMessageDialog(null, "Faltan datos por llenar");
+            } else {
+                // Crear la consulta SQL usando PreparedStatement para evitar inyección SQL
+                String sql = "INSERT INTO productos(nombre, cantidad, precio,"
+                        + " id_subcategoria, id_categoria)"
+                        + " VALUES (? , ? , ? , ? , ?)";
+                pst = con.prepareStatement(sql);
+                pst.setString(1, nombreProducto);
+                pst.setString(1, cantidadProducto);
+                pst.setString(1, precioProducto);
                 // Ejecutar la consulta de inserción
                 int rowsAffected = pst.executeUpdate();
 
                 // Verificar si la inserción fue exitosa
                 if (rowsAffected > 0) {
-                   
                     // Acción al insertar correctamente el usuario
-                    JOptionPane.showMessageDialog(null, "Categoria registrada "
+                    JOptionPane.showMessageDialog(null, "Producto registrado"
                             + "exitosamente");
-
                     // Crear la consulta SQL para obtener los datos
-                    String sql_2 = "SELECT * FROM categoria";
+                    String sql_2 = "SELECT * FROM productos";
                     st = con.createStatement();
                     rs = st.executeQuery(sql_2);
 
                     // Obtener el modelo de la tabla
                     DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
-                   // inf.loadInformacion(sql, st, rs, tblModel);
-                    loadInformacionCAT(sql, st, rs, tblModel);
-                    txtNombreCAT.setText("");
+                    // inf.loadInformacion(sql, st, rs, tblModel);
+                    loadInformacionINV(sql, st, rs, tblModel);
+                    //Limpiar campos
+                    txtNombreProducto.setText("");
+                    txtCantidad.setText("");
+                    txtPrecio.setText(""); 
+
                 } else {
                     // Mostrar mensaje de error en la inserción
                     JOptionPane.showMessageDialog(null, "Error al registrar la categoria");
@@ -324,7 +344,7 @@ public class InventarioVW extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
-        */
+
     }//GEN-LAST:event_btnAgregarInvActionPerformed
 
     private void btnCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriasActionPerformed
@@ -334,19 +354,58 @@ public class InventarioVW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCategoriasActionPerformed
 
     private void btnSubcategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubcategoriasActionPerformed
-         SubCategoriaVW subVW = new SubCategoriaVW();
-         subVW.setVisible(true);
+        SubCategoriaVW subVW = new SubCategoriaVW();
+        subVW.setVisible(true);
     }//GEN-LAST:event_btnSubcategoriasActionPerformed
 
-     private boolean isValidForm(String nombreCAT) {
-        if (nombreCAT.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingresa el nombre de la categoria");
+    private void cbSubCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSubCategoriaActionPerformed
+        String subcategorias[] = {"Alimento para perros y gatos", "Alimento para otras mascotas", "Suplementos Alimenticios"};
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(subcategorias);
+        cbSubCategoria.setModel(model);
+    }//GEN-LAST:event_cbSubCategoriaActionPerformed
+
+    private void cbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoriaActionPerformed
+        String categorias[] = {"Productos Alimenticios", "Accesorio para mascotas",
+            "Productos de Higiene y cuidado", "Medicamentos y Productos de Salud"};
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(categorias);
+        cbCategoria.setModel(model);
+    }//GEN-LAST:event_cbCategoriaActionPerformed
+
+    private int subCat(String s){
+        int t = 0;
+        
+        if(s.equals("Alimento para perros y gatos")){
+            t = 1;
+        }
+        if(s.equals("Alimento para otras mascotas")){
+            t=2;
+        }
+        if(s.equals("Suplementos Alimenticios")){
+            t=3;
+        }
+        return t;
+    }
+    
+    
+    private boolean isValidForm(String nombreProducto ,
+            String cantidadProducto , String precioProducto) {
+        if (nombreProducto.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingresa el nombre del producto");
             return false;
-        }  
+        }
+         if (cantidadProducto.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingresa la cantidad del producto");
+            return false;
+        }
+          if (precioProducto.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingresa el precio del Producto");
+            return false;
+        }
+          
         return true;
     }
-      
-       private void loadInventarioData() {
+
+    private void loadInventarioData() {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
@@ -380,8 +439,8 @@ public class InventarioVW extends javax.swing.JFrame {
             }
         }
     }
-       
-       public void loadInformacionINV(String sql, Statement st, ResultSet rs, DefaultTableModel tblModel) throws SQLException {
+
+    public void loadInformacionINV(String sql, Statement st, ResultSet rs, DefaultTableModel tblModel) throws SQLException {
         // Limpiar la tabla antes de agregar nuevos datos
         tblModel.setRowCount(0);
         // Añadir filas de datos al modelo de tabla
@@ -392,10 +451,11 @@ public class InventarioVW extends javax.swing.JFrame {
             String tprecio = rs.getString("precio");
             String tid_subcategoria = rs.getString("id_subcategoria");
             String tid_categoria = rs.getString("id_categoria");
-            String tbData[] = {id, tnombre , tcantidad , tprecio , tid_subcategoria , tid_categoria};
+            String tbData[] = {id, tnombre, tcantidad, tprecio, tid_subcategoria, tid_categoria};
             tblModel.addRow(tbData);
         }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -438,11 +498,21 @@ public class InventarioVW extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarInv;
     private javax.swing.JButton btnSubcategorias;
     private javax.swing.JButton btnVolverINV;
+    private javax.swing.JComboBox<String> cbCategoria;
+    private javax.swing.JComboBox<String> cbSubCategoria;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtNombreProducto;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }
