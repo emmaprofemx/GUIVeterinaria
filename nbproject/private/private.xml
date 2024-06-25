@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/gui/ProductosVW.java</file>
             <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/gui/Veterinaria.java</file>
+            <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/gui/InventarioVW.java</file>
             <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/gui/HomePage.java</file>
             <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/gui/RegistroCliente.java</file>
-            <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/db/BDConnection.java</file>
-            <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/gui/AnimalItemAddition.java</file>
-            <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/db/InformacionBD.java</file>
+            <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/gui/CategoriaVW.java</file>
+            <file>file:/C:/Users/EMMANUEL/Documents/NetBeansProjects/CRUDPRINCESA/src/gui/SubCategoriaVW.java</file>
         </group>
     </open-files>
 </project-private>

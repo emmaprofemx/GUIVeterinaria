@@ -186,9 +186,9 @@ public class Veterinaria extends javax.swing.JFrame {
                 // Acción al encontrar el usuario
                 dispose();
                 HomePage hpage = new HomePage();
-                // hpage.show();
+                 hpage.show();
                 InventarioVW invpage = new InventarioVW();
-                invpage.show();
+                //invpage.show();
                 RegistroCliente rcliente = new RegistroCliente();
                  //rcliente.show();
             } else {

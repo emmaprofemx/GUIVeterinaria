@@ -46,4 +46,17 @@ public class InformacionBD {
             tblModel.addRow(tbData);
         }
     }
+    
+    
+     public void loadInformacionCAT(String sql, Statement st, ResultSet rs, DefaultTableModel tblModel) throws SQLException {
+        // Limpiar la tabla antes de agregar nuevos datos
+        tblModel.setRowCount(0);
+        // Añadir filas de datos al modelo de tabla
+        while (rs.next()) {
+            String id = String.valueOf(rs.getInt("id"));
+            String tnombre = rs.getString("nombre");
+            String tbData[] = {id, tnombre};
+            tblModel.addRow(tbData);
+        }
+    }
 }
