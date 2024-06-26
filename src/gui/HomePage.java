@@ -63,6 +63,11 @@ public class HomePage extends javax.swing.JFrame {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-mascotacolor.png"))); // NOI18N
         jButton2.setText("AGREGAR PACIENTE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-agendar.png"))); // NOI18N
         jButton3.setText("AGENDAR CITA");
@@ -151,6 +156,11 @@ public class HomePage extends javax.swing.JFrame {
        InventarioVW invw = new InventarioVW();
        invw.setVisible(true);
     }//GEN-LAST:event_btnInventarioHPActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       PacienteVW pacVW = new PacienteVW();
+       pacVW.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

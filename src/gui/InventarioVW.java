@@ -162,6 +162,12 @@ public class InventarioVW extends javax.swing.JFrame {
         jLabel7.setText("CATEGORIA");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, -1, -1));
         getContentPane().add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, 120, -1));
+
+        txtCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 71, 30));
         getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 79, -1));
 
@@ -369,22 +375,92 @@ public class InventarioVW extends javax.swing.JFrame {
         cbCategoria.setModel(model);*/
     }//GEN-LAST:event_cbCategoriaActionPerformed
 
+    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadActionPerformed
+
     private int subCat(String s) {
         int t = 0;
         String sub1 = "Alimento para perros y gatos";
         String sub2 = "Alimento para otras mascotas";
         String sub3 = "Suplementos Alimenticios";
+        String sub4 = "Juguetes";
+        String sub5 = "Camas y mantas";
+        String sub6 = "Joyeria para mascota";
+        String sub7 = "Ropa y accesorios de moda";
+        String sub8 = "Transportadoras y Jaulas";
+        String sub9 = "Champús y acondicionaroes";
+        String sub10 = "Peines";
+        String sub11 = "Cortaúñas y limas";
+        String sub12 = "Toallas y pañales desechables";
+        String sub13 = "Productos de limpieza dental";
+        String sub14 = "Antiparasitarios";
+        String sub15 = "Medicamentos recetados";
+        String sub16 = "Productos de primeros auxilios";
+
         if (s.equals(sub1)) {
-            System.out.println("ERNTRASTE EN LA SUB1");
+            System.out.println("ENTRASTE EN LA SUB1");
             t = 1;
         }
         if (s.equals(sub2)) {
-            System.out.println("ENTRASTE A LA SUB2");
+            System.out.println("ENTRASTE EN LA SUB2");
             t = 2;
         }
         if (s.equals(sub3)) {
             System.out.println("ENTRASTE EN LA SUB3");
             t = 3;
+        }
+        if (s.equals(sub4)) {
+            System.out.println("ENTRASTE EN LA SUB4");
+            t = 4;
+        }
+        if (s.equals(sub5)) {
+            System.out.println("ENTRASTE EN LA SUB5");
+            t = 5;
+        }
+        if (s.equals(sub6)) {
+            System.out.println("ENTRASTE EN LA SUB6");
+            t = 6;
+        }
+        if (s.equals(sub7)) {
+            System.out.println("ENTRASTE EN LA SUB7");
+            t = 7;
+        }
+        if (s.equals(sub8)) {
+            System.out.println("ENTRASTE EN LA SUB8");
+            t = 8;
+        }
+        if (s.equals(sub9)) {
+            System.out.println("ENTRASTE EN LA SUB9");
+            t = 9;
+        }
+        if (s.equals(sub10)) {
+            System.out.println("ENTRASTE EN LA SUB10");
+            t = 10;
+        }
+        if (s.equals(sub11)) {
+            System.out.println("ENTRASTE EN LA SUB11");
+            t = 11;
+        }
+        if (s.equals(sub12)) {
+            System.out.println("ENTRASTE EN LA SUB12");
+            t = 12;
+        }
+        if (s.equals(sub13)) {
+            System.out.println("ENTRASTE EN LA SUB13");
+            t = 13;
+        }
+        if (s.equals(sub14)) {
+            System.out.println("ENTRASTE EN LA SUB14");
+            t = 14;
+        }
+        if (s.equals(sub15)) {
+            System.out.println("ENTRASTE EN LA SUB15");
+            t = 15;
+        }
+        if (s.equals(sub16)) {
+            System.out.println("ENTRASTE EN LA SUB16");
+            t = 16;
         }
         return t;
     }

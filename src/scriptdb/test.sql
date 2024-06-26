@@ -155,7 +155,7 @@ UPDATE subcategoria
 SET nombre = 'Joyeria para mascota'
 WHERE id = 8;
 
-
+select * from cliente
 
 select * from subcategoria
 
@@ -171,6 +171,34 @@ INSERT INTO productos (nombre, cantidad, precio, id_subcategoria, id_categoria) 
 ('Vitaminas y minerales', 999, 120, 3, 1),
 ('Suplementos para articulaciones', 999, 40, 3, 1),
 ('Probioticos', 999, 180, 3, 1);    
+
+CREATE TABLE mascota (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(50) NOT NULL,
+    especie VARCHAR(50),
+    raza VARCHAR(50),
+    edad INT,
+    cliente_id INT,
+    FOREIGN KEY (cliente_id) REFERENCES cliente(id)
+);
+
+select * from mascota
+INSERT INTO cliente (nombre, apellido, telefono, correo, direccion) VALUES
+('Juan', 'Pérez', '555-1234', 'juan.perez@example.com', 'Calle Falsa 123'),
+('María', 'Gómez', '555-5678', 'maria.gomez@example.com', 'Avenida Siempre Viva 456'),
+('Carlos', 'Ramírez', '555-8765', 'carlos.ramirez@example.com', 'Boulevard de los Sueños 789');
+
+select * from cliente
+
+-- Insertar datos de prueba en la tabla mascota
+INSERT INTO mascota (nombre, especie, raza, edad, cliente_id) VALUES
+('Firulais', 'Perro', 'Labrador', 3, 1),
+('Misi', 'Gato', 'Siames', 2, 1),
+('Rex', 'Perro', 'Pastor Alemán', 5, 2),
+('Luna', 'Gato', 'Persa', 1, 3),
+('Nemo', 'Pez', 'Payaso', 1, 3);
+
+select * from mascota
 
 select * from productos
 
