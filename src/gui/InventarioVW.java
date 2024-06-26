@@ -46,13 +46,11 @@ public class InventarioVW extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         btnCategorias = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         btnAgregarInv = new javax.swing.JButton();
         btnEliminarInv = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         btnVolverINV = new javax.swing.JButton();
         btnSubcategorias = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -82,10 +80,7 @@ public class InventarioVW extends javax.swing.JFrame {
                 btnCategoriasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 71, 126, -1));
-
-        jButton2.setText("PRODUCTOS");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 71, 126, -1));
+        getContentPane().add(btnCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 126, -1));
 
         btnAgregarInv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-add-48.png"))); // NOI18N
         btnAgregarInv.setText("AGREGAR");
@@ -130,9 +125,6 @@ public class InventarioVW extends javax.swing.JFrame {
         btnEditar.setText("EDITAR");
         getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, -1, -1));
 
-        jLabel1.setText("AQUI VAN LOS PRODUCTOS ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 32, -1, -1));
-
         btnVolverINV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icono-volver.png"))); // NOI18N
         btnVolverINV.setText("VOLVER");
         btnVolverINV.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +140,7 @@ public class InventarioVW extends javax.swing.JFrame {
                 btnSubcategoriasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSubcategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 71, -1, -1));
+        getContentPane().add(btnSubcategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 70, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("CANTIDAD");
@@ -173,7 +165,7 @@ public class InventarioVW extends javax.swing.JFrame {
         getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 71, 30));
         getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 79, -1));
 
-        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productos Alimenticios", "Accesorio para mascotas", "Productos de Higiene y cuidado", "Medicamentos y Productos de Salud" }));
+        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar Categoria", "Productos Alimenticios", "Accesorio para mascotas", "Productos de Higiene y cuidado", "Medicamentos y Productos de Salud" }));
         cbCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCategoriaActionPerformed(evt);
@@ -181,7 +173,7 @@ public class InventarioVW extends javax.swing.JFrame {
         });
         getContentPane().add(cbCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, 170, -1));
 
-        cbSubCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alimento para perros y gatos", "Alimento para otras mascotas", "Suplementos Alimenticios" }));
+        cbSubCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar SubCategoria", "Alimento para perros y gatos", "Alimento para otras mascotas", "Suplementos Alimenticios", "Juguetes", "Camas y mantas", "Joyeria para mascota", "Ropa y accesorios de moda", "Transportadoras y Jaulas", "Champús y acondicionaroes", "Peines", "Cortaúñas y limas", "Toallas y pañales desechables", "Productos de limpieza dental", "Antiparasitarios", "Medicamentos recetados", "Productos de primeros auxilios" }));
         cbSubCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSubCategoriaActionPerformed(evt);
@@ -265,14 +257,13 @@ public class InventarioVW extends javax.swing.JFrame {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + name_db
                     + "?useSSL=false", "root", "password");
             // Obtener el texto del usuario y la contraseña
-            String nombreProducto =  txtNombreProducto.getText();
-            String cantidadProducto =  txtNombreProducto.getText();
+            String nombreProducto = txtNombreProducto.getText();
+            String cantidadProducto = txtCantidad.getText();
             String precioProducto = txtPrecio.getText();
-             int value = subCat(cbSubCategoria.getSelectedItem().toString());
+            int value = subCat(cbSubCategoria.getSelectedItem().toString());
+            int valueCat = Cat(cbCategoria.getSelectedItem().toString());
             /*
               String idsub = txtIdCategoriaPadre.getText();
-           
-
             if (isValidForm(nombre, idsub) == false) {
                 // JOptionPane.showMessageDialog(null, "Faltan datos por llenar");
             } else {
@@ -282,8 +273,8 @@ public class InventarioVW extends javax.swing.JFrame {
                 pst.setString(1, nombre);
                 pst.setInt(2, Integer.parseInt(idsub));
                 // pst.setString(2, idsub);
-                   */
-            if (isValidForm(nombreProducto ,cantidadProducto , precioProducto) == false) {
+             */
+            if (isValidForm(nombreProducto, cantidadProducto, precioProducto) == false) {
                 // JOptionPane.showMessageDialog(null, "Faltan datos por llenar");
             } else {
                 // Crear la consulta SQL usando PreparedStatement para evitar inyección SQL
@@ -292,8 +283,13 @@ public class InventarioVW extends javax.swing.JFrame {
                         + " VALUES (? , ? , ? , ? , ?)";
                 pst = con.prepareStatement(sql);
                 pst.setString(1, nombreProducto);
-                pst.setString(1, cantidadProducto);
-                pst.setString(1, precioProducto);
+                //pst.setString(2, cantidadProducto);
+                pst.setInt(2, Integer.parseInt(cantidadProducto));
+                //pst.setString(3, precioProducto);
+                pst.setInt(3, Integer.parseInt(precioProducto));
+                pst.setInt(4, value); //substring
+                pst.setInt(5, valueCat);
+
                 // Ejecutar la consulta de inserción
                 int rowsAffected = pst.executeUpdate();
 
@@ -314,7 +310,7 @@ public class InventarioVW extends javax.swing.JFrame {
                     //Limpiar campos
                     txtNombreProducto.setText("");
                     txtCantidad.setText("");
-                    txtPrecio.setText(""); 
+                    txtPrecio.setText("");
 
                 } else {
                     // Mostrar mensaje de error en la inserción
@@ -359,49 +355,80 @@ public class InventarioVW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSubcategoriasActionPerformed
 
     private void cbSubCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSubCategoriaActionPerformed
-        String subcategorias[] = {"Alimento para perros y gatos", "Alimento para otras mascotas", "Suplementos Alimenticios"};
+        /* String subcategorias[] = {"Alimento para perros y gatos", "Alimento para otras mascotas", "Suplementos Alimenticios"};
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(subcategorias);
-        cbSubCategoria.setModel(model);
+        cbSubCategoria.setModel(model);*/
+
+        String selectValue = cbSubCategoria.getSelectedItem().toString();
     }//GEN-LAST:event_cbSubCategoriaActionPerformed
 
     private void cbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoriaActionPerformed
-        String categorias[] = {"Productos Alimenticios", "Accesorio para mascotas",
+        /* String categorias[] = {"Productos Alimenticios", "Accesorio para mascotas",
             "Productos de Higiene y cuidado", "Medicamentos y Productos de Salud"};
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(categorias);
-        cbCategoria.setModel(model);
+        cbCategoria.setModel(model);*/
     }//GEN-LAST:event_cbCategoriaActionPerformed
 
-    private int subCat(String s){
+    private int subCat(String s) {
         int t = 0;
-        
-        if(s.equals("Alimento para perros y gatos")){
+        String sub1 = "Alimento para perros y gatos";
+        String sub2 = "Alimento para otras mascotas";
+        String sub3 = "Suplementos Alimenticios";
+        if (s.equals(sub1)) {
+            System.out.println("ERNTRASTE EN LA SUB1");
             t = 1;
         }
-        if(s.equals("Alimento para otras mascotas")){
-            t=2;
+        if (s.equals(sub2)) {
+            System.out.println("ENTRASTE A LA SUB2");
+            t = 2;
         }
-        if(s.equals("Suplementos Alimenticios")){
-            t=3;
+        if (s.equals(sub3)) {
+            System.out.println("ENTRASTE EN LA SUB3");
+            t = 3;
         }
         return t;
     }
-    
-    
-    private boolean isValidForm(String nombreProducto ,
-            String cantidadProducto , String precioProducto) {
+
+    private int Cat(String s) {
+        int t = 0;
+        String cat1 = "Productos Alimenticios";
+        String cat2 = "Accesorio para mascotas";
+        String cat3 = "Productos de Higiene y cuidado";
+        String cat4 = "Medicamentos y Productos de Salud";
+        if (s.equals(cat1)) {
+            System.out.println("CAT1");
+            t = 1;
+        }
+        if (s.equals(cat2)) {
+            System.out.println("CAT2");
+            t = 2;
+        }
+        if (s.equals(cat3)) {
+            System.out.println("CAT3");
+            t = 3;
+        }
+        if (s.equals(cat4)) {
+            System.out.println("CAT4");
+            t = 4;
+        }
+        return t;
+    }
+
+    private boolean isValidForm(String nombreProducto,
+            String cantidadProducto, String precioProducto) {
         if (nombreProducto.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingresa el nombre del producto");
             return false;
         }
-         if (cantidadProducto.isEmpty()) {
+        if (cantidadProducto.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingresa la cantidad del producto");
             return false;
         }
-          if (precioProducto.isEmpty()) {
+        if (precioProducto.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Ingresa el precio del Producto");
             return false;
         }
-          
+
         return true;
     }
 
@@ -500,8 +527,6 @@ public class InventarioVW extends javax.swing.JFrame {
     private javax.swing.JButton btnVolverINV;
     private javax.swing.JComboBox<String> cbCategoria;
     private javax.swing.JComboBox<String> cbSubCategoria;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

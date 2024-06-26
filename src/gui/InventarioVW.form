@@ -58,17 +58,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="114" y="71" width="126" height="-1"/>
-        </Constraint>
-      </Constraints>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="PRODUCTOS"/>
-      </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="258" y="71" width="126" height="-1"/>
+          <AbsoluteConstraints x="140" y="70" width="126" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -182,16 +172,6 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="AQUI VAN LOS PRODUCTOS "/>
-      </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="420" y="32" width="-1" height="-1"/>
-        </Constraint>
-      </Constraints>
-    </Component>
     <Component class="javax.swing.JButton" name="btnVolverINV">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -217,7 +197,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="442" y="71" width="-1" height="-1"/>
+          <AbsoluteConstraints x="400" y="70" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -310,11 +290,12 @@
     <Component class="javax.swing.JComboBox" name="cbCategoria">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Productos Alimenticios"/>
-            <StringItem index="1" value="Accesorio para mascotas"/>
-            <StringItem index="2" value="Productos de Higiene y cuidado"/>
-            <StringItem index="3" value="Medicamentos y Productos de Salud"/>
+          <StringArray count="5">
+            <StringItem index="0" value="Seleccionar Categoria"/>
+            <StringItem index="1" value="Productos Alimenticios"/>
+            <StringItem index="2" value="Accesorio para mascotas"/>
+            <StringItem index="3" value="Productos de Higiene y cuidado"/>
+            <StringItem index="4" value="Medicamentos y Productos de Salud"/>
           </StringArray>
         </Property>
       </Properties>
@@ -333,10 +314,24 @@
     <Component class="javax.swing.JComboBox" name="cbSubCategoria">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Alimento para perros y gatos"/>
-            <StringItem index="1" value="Alimento para otras mascotas"/>
-            <StringItem index="2" value="Suplementos Alimenticios"/>
+          <StringArray count="17">
+            <StringItem index="0" value="Seleccionar SubCategoria"/>
+            <StringItem index="1" value="Alimento para perros y gatos"/>
+            <StringItem index="2" value="Alimento para otras mascotas"/>
+            <StringItem index="3" value="Suplementos Alimenticios"/>
+            <StringItem index="4" value="Juguetes"/>
+            <StringItem index="5" value="Camas y mantas"/>
+            <StringItem index="6" value="Joyeria para mascota"/>
+            <StringItem index="7" value="Ropa y accesorios de moda"/>
+            <StringItem index="8" value="Transportadoras y Jaulas"/>
+            <StringItem index="9" value="Champ&#xfa;s y acondicionaroes"/>
+            <StringItem index="10" value="Peines"/>
+            <StringItem index="11" value="Corta&#xfa;&#xf1;as y limas"/>
+            <StringItem index="12" value="Toallas y pa&#xf1;ales desechables"/>
+            <StringItem index="13" value="Productos de limpieza dental"/>
+            <StringItem index="14" value="Antiparasitarios"/>
+            <StringItem index="15" value="Medicamentos recetados"/>
+            <StringItem index="16" value="Productos de primeros auxilios"/>
           </StringArray>
         </Property>
       </Properties>
