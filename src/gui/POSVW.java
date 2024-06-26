@@ -6,6 +6,8 @@
 package gui;
 
 import crudprincesa.WindowUtils;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +22,7 @@ public class POSVW extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         setLocationRelativeTo(null);
+        llenarTablaConDatosEstaticos();
     }
 
     /**
@@ -47,11 +50,12 @@ public class POSVW extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtTotal3 = new javax.swing.JTextField();
+        txtTotalFinal = new javax.swing.JTextField();
         txtIdProducto = new javax.swing.JTextField();
         txtNombreProducto = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -124,6 +128,11 @@ public class POSVW extends javax.swing.JFrame {
         });
         getContentPane().add(txtCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 180, 110, 30));
 
+        txtTotalProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalProductoActionPerformed(evt);
+            }
+        });
         txtTotalProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTotalProductoKeyTyped(evt);
@@ -158,12 +167,12 @@ public class POSVW extends javax.swing.JFrame {
         jLabel10.setText("PRECIO");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, -1, -1));
 
-        txtTotal3.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtTotalFinal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtTotal3KeyTyped(evt);
+                txtTotalFinalKeyTyped(evt);
             }
         });
-        getContentPane().add(txtTotal3, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, 110, 30));
+        getContentPane().add(txtTotalFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, 110, 30));
 
         txtIdProducto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -173,6 +182,11 @@ public class POSVW extends javax.swing.JFrame {
         getContentPane().add(txtIdProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 110, 30));
         getContentPane().add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 160, 30));
 
+        txtCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadActionPerformed(evt);
+            }
+        });
         txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCantidadKeyTyped(evt);
@@ -180,6 +194,11 @@ public class POSVW extends javax.swing.JFrame {
         });
         getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 110, 30));
 
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioActionPerformed(evt);
+            }
+        });
         txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtPrecioKeyTyped(evt);
@@ -187,25 +206,29 @@ public class POSVW extends javax.swing.JFrame {
         });
         getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 110, 30));
 
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-add-48.png"))); // NOI18N
+        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 130, 60, 50));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        /*
         DefaultTableModel tblModel = (DefaultTableModel) jTable1.getModel();
 
-        String tblNombre = tblModel.getValueAt(jTable1.getSelectedRow(), 0).toString();
-        String tblApellidos = tblModel.getValueAt(jTable1.getSelectedRow(), 1).toString();
-        String tblTelefono = tblModel.getValueAt(jTable1.getSelectedRow(), 2).toString();
-        String tblCorreo = tblModel.getValueAt(jTable1.getSelectedRow(), 3).toString();
-        String tblDomicilio = tblModel.getValueAt(jTable1.getSelectedRow(), 4).toString();
+        String tblid = tblModel.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        String tblnombre = tblModel.getValueAt(jTable1.getSelectedRow(), 1).toString();
+        String tblcantidad = tblModel.getValueAt(jTable1.getSelectedRow(), 2).toString();
+        String tblprecio = tblModel.getValueAt(jTable1.getSelectedRow(), 3).toString();
 
-        txtNombre.setText(tblNombre);
-        txtApellidos.setText(tblApellidos);
-        txtTelefono.setText(tblTelefono);
-        txtCorreo.setText(tblCorreo);
-        txtDomicilio.setText(tblDomicilio);
-        */
+        // Asignar los valores a los campos de texto
+        txtIdProducto.setText(tblid);
+        txtNombreProducto.setText(tblnombre);
+        txtCantidad.setText(tblcantidad);
+        txtPrecio.setText(tblprecio);
+        txtTotalProducto.setText(""); // Limpiar el campo de total
+        txtCantidad.setText(tblcantidad); // Asignar el valor inicial al campo de cantidad modificada
+
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnVolverSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverSubActionPerformed
@@ -215,43 +238,43 @@ public class POSVW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverSubActionPerformed
 
     private void txtIdProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdProductoKeyTyped
-         char c = evt.getKeyChar();
-       
-       if(!Character.isDigit(c)){
-           evt.consume();
-       }
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtIdProductoKeyTyped
 
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
         char c = evt.getKeyChar();
-       
-       if(!Character.isDigit(c)){
-           evt.consume();
-       }
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
-         char c = evt.getKeyChar();
-       
-       if(!Character.isDigit(c)){
-           evt.consume();
-       }
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtPrecioKeyTyped
 
     private void txtTotalProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalProductoKeyTyped
-       char c = evt.getKeyChar();
-       
-       if(!Character.isDigit(c)){
-           evt.consume();
-       }
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtTotalProductoKeyTyped
 
     private void txtPagarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPagarKeyTyped
         char c = evt.getKeyChar();
-       
-       if(!Character.isDigit(c)){
-           evt.consume();
-       }
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtPagarKeyTyped
 
     private void txtCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCambioActionPerformed
@@ -260,19 +283,90 @@ public class POSVW extends javax.swing.JFrame {
 
     private void txtCambioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCambioKeyTyped
         char c = evt.getKeyChar();
-       
-       if(!Character.isDigit(c)){
-           evt.consume();
-       }
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtCambioKeyTyped
 
-    private void txtTotal3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotal3KeyTyped
-         char c = evt.getKeyChar();
-       
-       if(!Character.isDigit(c)){
-           evt.consume();
-       }
-    }//GEN-LAST:event_txtTotal3KeyTyped
+    private void txtTotalFinalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTotalFinalKeyTyped
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            evt.consume();
+             calcularTotal();
+        }
+    }//GEN-LAST:event_txtTotalFinalKeyTyped
+
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioActionPerformed
+
+    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadActionPerformed
+
+    private void txtTotalProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalProductoActionPerformed
+        // TODO add your handling code here:
+         calcularTotal();
+    }//GEN-LAST:event_txtTotalProductoActionPerformed
+
+    private void llenarTablaConDatosEstaticos() {
+        // Crear el modelo de la tabla con los nombres de las columnas
+        DefaultTableModel tblModel = new DefaultTableModel(new Object[]{
+            "ID", "Nombre", "Cantidad", "Precio", "ID_Subcategoria", "ID_Categoria"}, 0);
+
+        // Añadir filas de datos estáticos al modelo
+        Object[][] datos = {
+            {1, "Croquetas para mascota pequeña (Seco)", 999, 95, 1, 1},
+            {2, "Croquetas para mascota mediana (Seco)", 999, 200, 1, 1},
+            {3, "Croquetas para mascota grande (Seco)", 999, 350, 1, 1},
+            {4, "Alimento para Aves", 999, 40, 2, 1},
+            {5, "Alimento para Reptiles", 999, 80, 2, 1},
+            {6, "Alimento para Roedores", 999, 40, 2, 1},
+            {7, "Alimento para Peces", 999, 85, 2, 1},
+            {8, "Vitaminas y minerales", 999, 120, 3, 1},
+            {9, "Suplementos para articulaciones", 999, 40, 3, 1},
+            {10, "Probioticos", 999, 180, 3, 1},
+            {11, "perro", 999, 29, 1, 1},
+            {12, "medicamentos y suplementos", 999, 80, 1, 1},
+            {13, "test", 2334, 11, 1, 1},
+            {14, "TES3", 67, 334, 1, 1},
+            {15, "qw", 33, 12, 3, 1},
+            {17, "Vendaje", 30, 40, 16, 4}
+        };
+
+        for (Object[] fila : datos) {
+            tblModel.addRow(fila);
+        }
+
+        // Asignar el modelo a la tabla
+        jTable1.setModel(tblModel);
+    }
+
+    // Método para calcular el total
+    private void calcularTotal() {
+        try {
+            // Obtener los valores de los campos de texto
+            String tblid = txtIdProducto.getText();
+            String tblnombre = txtNombreProducto.getText();
+            String tblcantidadModificada = txtCantidad.getText();
+            String tblprecio = txtPrecio.getText();
+
+            // Convertir cantidad modificada y precio a valores numéricos
+            int cantidad = Integer.parseInt(tblcantidadModificada);
+            double precio = Double.parseDouble(tblprecio);
+
+            // Calcular el total
+            double total = cantidad * precio;
+
+            // Asignar el resultado al campo de texto del total
+            txtTotalProducto.setText(String.valueOf(total));
+        } catch (NumberFormatException e) {
+            // Manejar el error si la entrada no es un número válido
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese valores numéricos válidos.");
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -310,6 +404,7 @@ public class POSVW extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnPagar;
     private javax.swing.JButton btnVolverSub;
     private javax.swing.JLabel jLabel1;
@@ -329,7 +424,7 @@ public class POSVW extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtPagar;
     private javax.swing.JTextField txtPrecio;
-    private javax.swing.JTextField txtTotal3;
+    private javax.swing.JTextField txtTotalFinal;
     private javax.swing.JTextField txtTotalProducto;
     // End of variables declaration//GEN-END:variables
 }
